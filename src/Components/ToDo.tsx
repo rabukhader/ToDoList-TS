@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { TiEdit } from 'react-icons/ti';
 import TodoForm from './ToDoForm';
-
+interface Todo {
+  id: number;
+  text: string;
+  isComplete: boolean;
+}
 interface TodoProps {
   todos: {
   id: number;
@@ -11,7 +15,7 @@ interface TodoProps {
   }[];
   completeTodo: (id: number) => void;
   removeTodo: (id: number) => void;
-  updateTodo: (id: number, value: string) => void;
+  updateTodo: (id: number, newValue: { text: string }) => void;
 }
 
 const Todo = ({ todos, completeTodo, removeTodo, updateTodo }:TodoProps) => {
@@ -21,8 +25,8 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }:TodoProps) => {
     isComplete: ''
   });
 
-  const submitUpdate = (value: string) => {
-  updateTodo(edit.id!, value);
+  const submitUpdate = (todo: Todo) => {
+  updateTodo(edit.id!, todo.text);
     setEdit({
       id: null,
       value: '',
@@ -52,4 +56,5 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }:TodoProps) => {
         </div>
   ));
 };
+
 export default Todo;

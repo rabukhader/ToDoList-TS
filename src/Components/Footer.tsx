@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface Props {
+interface footerProps {
 todos: Array<{
 id: number;
 text: string;
@@ -8,7 +8,7 @@ isComplete: boolean;
 }>;
 }
 
-const Footer: React.FC<Props> = (props) => {
+const Footer(props:footerProps) => {
 let todos = props.todos;
 let sum = todos.filter((todo) => !todo.isComplete).length;
 
