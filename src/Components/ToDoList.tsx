@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import Footer from './Footer';
 import Todo from './ToDo';
 import TodoForm from './ToDoForm';  
+import { TodoType } from './../type';
 
 
 const TodoList = () => {
-  const [todos, setTodos] = useState<{
-    id:number; text: string; isComplete: boolean;
-}[]>([]);
+  const [todos, setTodos] = useState<TodoType[]>([]);
   const [searchText, setSearchText] = useState('');
   const visibleToDos = todos?.filter((todo) => todo.text?.includes(searchText))
 
 
-  const addTodo = (todo: { text: string }) => {
+  const addTodo = (todo: TodoType) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
@@ -20,7 +19,7 @@ const TodoList = () => {
     setTodos(newTodos);
   };
 
-  const updateTodo = (todoId: number, newValue: { text: string }) => {
+  const updateTodo = (todoId: number, newValue: TodoType) => {
     if (!newValue.text || /^\s*$/.test(newValue.text)) {
       return;
     }
@@ -52,7 +51,7 @@ const TodoList = () => {
       <h1>What's the Plan for Today?</h1>
       <TodoForm onSubmit={addTodo} />
       <div>
-        <input type="text" className='mb-3 searchinput' value={searchText} onChange={onSearch} placeholder='Search'/>
+        <input type="text" className='mb-3 search-input' value={searchText} onChange={onSearch} placeholder='Search'/>
       </div>
       <Todo
         todos={visibleToDos}

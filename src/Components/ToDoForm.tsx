@@ -1,4 +1,5 @@
 import React, { useState, useRef, FormEvent } from 'react';
+import { TodoType } from './../type';
 
 interface Todo {
   id: number;
@@ -8,13 +9,11 @@ interface Todo {
 
 interface TodoFormProps {
   onSubmit: (todo: Todo) => void;
-  edit?: {
-    value: string;
-  };
+  edit?: TodoType;
 }
 
-const TodoForm = (props :TodoFormProps) => {
-  const [input, setInput] = useState(props.edit ? props.edit.value : '');
+const TodoForm = (props: TodoFormProps) => {
+  const [input, setInput] = useState(props.edit ? props.edit.text : '');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
